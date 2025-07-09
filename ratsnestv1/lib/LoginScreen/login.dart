@@ -37,6 +37,8 @@ class _LoginScreen extends State<LoginScreen> {
                 child: Form(
                   child: Column(
                     children: [
+                      // Email Textbox
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 750),
@@ -60,6 +62,9 @@ class _LoginScreen extends State<LoginScreen> {
                           controller: emailController,
                         ),
                       ),
+
+                      // Password Textbox
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 750),
@@ -83,15 +88,18 @@ class _LoginScreen extends State<LoginScreen> {
                           controller: passwordController,
                         ),
                       ),
+
+                      // Login Button
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 750),
                         child: MaterialButton(
                           minWidth: double.infinity,
                           onPressed: () {
+                            // Button Logic to Login
                             if (emailController.text.isNotEmpty &&
                                 passwordController.text.isNotEmpty) {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => HomeScreen()));
@@ -109,9 +117,11 @@ class _LoginScreen extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              // Create Account Link
+
                               TextButton(
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -123,9 +133,12 @@ class _LoginScreen extends State<LoginScreen> {
                                       style: TextStyle(
                                           decoration: TextDecoration.underline,
                                           color: Colors.black))),
+
+                              // Forgot Password Link
+
                               TextButton(
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>

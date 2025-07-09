@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ratsnestv1/LoginScreen/home_screen.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount();
@@ -7,6 +8,11 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccount extends State<CreateAccount> {
+  final emailController = TextEditingController();
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPWController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +25,7 @@ class _CreateAccount extends State<CreateAccount> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Login',
+                'Create Account',
                 style: TextStyle(
                     fontSize: 35,
                     color: Colors.blue,
@@ -31,6 +37,8 @@ class _CreateAccount extends State<CreateAccount> {
                 child: Form(
                   child: Column(
                     children: [
+                      // Email Textbox
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 750),
@@ -43,7 +51,7 @@ class _CreateAccount extends State<CreateAccount> {
                             border: OutlineInputBorder(),
                             suffixIcon: IconButton(
                                 onPressed: () {
-                                  //emailController.clear();
+                                  emailController.clear();
                                 },
                                 icon: Icon(Icons.clear)),
                           ),
@@ -51,9 +59,38 @@ class _CreateAccount extends State<CreateAccount> {
                           validator: (value) {
                             return value!.isEmpty ? 'Enter an Email' : null;
                           },
-                          //controller: emailController,
+                          controller: emailController,
                         ),
                       ),
+
+                      // Username Textbox
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 750),
+                        child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Username',
+                            hintText: 'Enter Username',
+                            prefixIcon: Icon(Icons.person_sharp),
+                            border: OutlineInputBorder(),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  userNameController.clear();
+                                },
+                                icon: Icon(Icons.clear)),
+                          ),
+                          onChanged: (String value) {},
+                          validator: (value) {
+                            return value!.isEmpty ? 'Enter a Username' : null;
+                          },
+                          controller: userNameController,
+                        ),
+                      ),
+
+                      // Password Textbox
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 750),
@@ -66,7 +103,33 @@ class _CreateAccount extends State<CreateAccount> {
                             border: OutlineInputBorder(),
                             suffixIcon: IconButton(
                                 onPressed: () {
-                                  //passwordController.clear();
+                                  passwordController.clear();
+                                },
+                                icon: Icon(Icons.clear)),
+                          ),
+                          onChanged: (String value) {},
+                          validator: (value) {
+                            return value!.isEmpty ? 'Renter Password' : null;
+                          },
+                          controller: passwordController,
+                        ),
+                      ),
+
+                      // Confirm Password Textbox
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 750),
+                        child: TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            hintText: 'Renter Password',
+                            prefixIcon: Icon(Icons.password_sharp),
+                            border: OutlineInputBorder(),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  confirmPWController.clear();
                                 },
                                 icon: Icon(Icons.clear)),
                           ),
@@ -74,28 +137,37 @@ class _CreateAccount extends State<CreateAccount> {
                           validator: (value) {
                             return value!.isEmpty ? 'Enter a Password' : null;
                           },
-                          //controller: passwordController,
+                          controller: confirmPWController,
                         ),
                       ),
+
+                      // Create Account Button
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 750),
                         child: MaterialButton(
                           minWidth: double.infinity,
-                          onPressed: () {},
+                          onPressed: () {
+                            // Button logic to create an account
+
+                            if (emailController.text.isNotEmpty &&
+                                userNameController.text.isNotEmpty &&
+                                passwordController.text.isNotEmpty &&
+                                confirmPWController.text.isNotEmpty &&
+                                passwordController.text ==
+                                    (confirmPWController.text)) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            }
+                          },
                           color: Colors.blue,
                           textColor: Colors.black,
-                          child: Text('Login'),
+                          child: Text('Create Account'),
                         ),
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                              overlayColor: Colors.transparent),
-                          child: Text('Forgot Password',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.black)))
+                      )
                     ],
                   ),
                 ),
