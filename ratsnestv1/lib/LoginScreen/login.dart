@@ -3,163 +3,86 @@ import 'package:ratsnestv1/LoginScreen/create_account.dart';
 import 'package:ratsnestv1/LoginScreen/forgot_Password.dart';
 import 'package:ratsnestv1/LoginScreen/home_screen.dart';
 
+import 'package:flutter/material.dart';
+
 class LoginScreen extends StatefulWidget {
-  const LoginScreen();
   @override
-  State<LoginScreen> createState() => _LoginScreen();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreen extends State<LoginScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Login Screen'),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Login',
-                style: TextStyle(
-                    fontSize: 35,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: screenHeight * 0.1),
+                Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.08,
+                    fontWeight: FontWeight.bold,
                     color: Colors.blue,
-                    fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 300),
-                child: Form(
-                  child: Column(
-                    children: [
-                      // Email Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'Enter Email',
-                            prefixIcon: Icon(Icons.email_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  emailController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter an Email' : null;
-                          },
-                          controller: emailController,
-                        ),
-                      ),
-
-                      // Password Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter Password',
-                            prefixIcon: Icon(Icons.password_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  passwordController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter a Password' : null;
-                          },
-                          controller: passwordController,
-                        ),
-                      ),
-
-                      // Login Button
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 750),
-                        child: MaterialButton(
-                          minWidth: double.infinity,
-                          onPressed: () {
-                            // Button Logic to Login
-                            if (emailController.text.isNotEmpty &&
-                                passwordController.text.isNotEmpty) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomeScreen()));
-                            }
-                          },
-                          color: Colors.blue,
-                          textColor: Colors.black,
-                          child: Text('Login'),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 750),
-                        child: Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              // Create Account Link
-
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CreateAccount()));
-                                  },
-                                  style: TextButton.styleFrom(
-                                      overlayColor: Colors.transparent),
-                                  child: Text('Create Account',
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.black))),
-
-                              // Forgot Password Link
-
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ForgotPassword()));
-                                  },
-                                  style: TextButton.styleFrom(
-                                      overlayColor: Colors.transparent),
-                                  child: Text('Forgot Password',
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color: Colors.black))),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
                   ),
                 ),
-              )
-            ],
-          )),
+                SizedBox(height: screenHeight * 0.05),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.05),
+                Container(
+                  width: screenWidth * 0.6,
+                  height: screenHeight * 0.06,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: screenWidth * 0.045),
+                    ),
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                TextButton(
+                  onPressed: () {
+                     Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgotPassword()),
+                    );
+                  },
+                  child: Text('Forgot Password?'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
