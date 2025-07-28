@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:ratsnestv1/LoginScreen/create_account.dart';
+import 'package:ratsnestv1/LoginScreen/create_account.dart';
 import 'package:ratsnestv1/LoginScreen/forgot_Password.dart';
 import 'package:ratsnestv1/HomeScreen/home_screen.dart';
-
-//import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -74,10 +72,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: screenHeight * 0.03,
                   child: ElevatedButton(
                     onPressed: () {
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty)
+                        { ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Please fill in all fields')),
+                          );
+                      } else {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
+                      }
                     },
                     child: Text(
                       'Login',
@@ -98,6 +103,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     'Forgot Password?',
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                 ),
+                 TextButton(
+                  style: ButtonStyle(
+                      overlayColor: WidgetStatePropertyAll(Colors.transparent)),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => CreateAccount()),
+                    );
+                  },
+                  child: Text(
+                    'Create Account',
                     style: TextStyle(decoration: TextDecoration.underline),
                   ),
                 ),

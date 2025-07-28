@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ratsnestv1/HomeScreen/home_screen.dart';
+import 'package:ratsnestv1/LoginScreen/login.dart';
 
 class ForgotPassword extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -38,7 +40,15 @@ class ForgotPassword extends StatelessWidget {
                   height: screenHeight * 0.06,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Your reset logic here
+                      // Handle password reset logic here
+                      print('Reset password for: ${emailController.text}');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Password reset link sent!')),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
                     },
                     child: Text(
                       'Reset Password',

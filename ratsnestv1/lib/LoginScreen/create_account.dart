@@ -1,179 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:ratsnestv1/HomeScreen/home_screen.dart';
+import 'package:ratsnestv1/LoginScreen/login.dart';
+import 'create_account.dart';
+import 'forgot_password.dart';
+
 
 class CreateAccount extends StatefulWidget {
-  const CreateAccount();
   @override
-  State<CreateAccount> createState() => _CreateAccount();
+  _CreateAccountScreenState createState() => _CreateAccountScreenState();
 }
 
-class _CreateAccount extends State<CreateAccount> {
-  final emailController = TextEditingController();
-  final userNameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPWController = TextEditingController();
+class _CreateAccountScreenState extends State<CreateAccount> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Create Account'),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Create Account',
-                style: TextStyle(
-                    fontSize: 35,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: screenHeight * 0.08),
+                Text(
+                  'Create Account',
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.07,
+                    fontWeight: FontWeight.bold,
                     color: Colors.blue,
-                    fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 300),
-                child: Form(
-                  child: Column(
-                    children: [
-                      // Email Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'Enter Email',
-                            prefixIcon: Icon(Icons.email_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  emailController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter an Email' : null;
-                          },
-                          controller: emailController,
-                        ),
-                      ),
-
-                      // Username Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            hintText: 'Enter Username',
-                            prefixIcon: Icon(Icons.person_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  userNameController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter a Username' : null;
-                          },
-                          controller: userNameController,
-                        ),
-                      ),
-
-                      // Password Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter Password',
-                            prefixIcon: Icon(Icons.password_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  passwordController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Renter Password' : null;
-                          },
-                          controller: passwordController,
-                        ),
-                      ),
-
-                      // Confirm Password Textbox
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 750),
-                        child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            hintText: 'Renter Password',
-                            prefixIcon: Icon(Icons.password_sharp),
-                            border: OutlineInputBorder(),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  confirmPWController.clear();
-                                },
-                                icon: Icon(Icons.clear)),
-                          ),
-                          onChanged: (String value) {},
-                          validator: (value) {
-                            return value!.isEmpty ? 'Enter a Password' : null;
-                          },
-                          controller: confirmPWController,
-                        ),
-                      ),
-
-                      // Create Account Button
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 750),
-                        child: MaterialButton(
-                          minWidth: double.infinity,
-                          onPressed: () {
-                            // Button logic to create an account
-
-                            if (emailController.text.isNotEmpty &&
-                                userNameController.text.isNotEmpty &&
-                                passwordController.text.isNotEmpty &&
-                                confirmPWController.text.isNotEmpty &&
-                                passwordController.text ==
-                                    (confirmPWController.text)) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomeScreen()));
-                            }
-                          },
-                          color: Colors.blue,
-                          textColor: Colors.black,
-                          child: Text('Create Account'),
-                        ),
-                      )
-                    ],
                   ),
                 ),
-              )
-            ],
-          )),
+                SizedBox(height: screenHeight * 0.05),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                TextField(
+                  controller: confirmPasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.05),
+                Container(
+                  width: screenWidth * 0.6,
+                  height: screenHeight * 0.06,
+                  child: ElevatedButton(
+                    onPressed: () {
+                       if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty ||
+                          confirmPasswordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Please fill in all fields')),
+                        );
+                      } else {
+                        if (passwordController.text != confirmPasswordController.text) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Passwords do not match')),
+                          );
+                        } else {
+                            print('Verify Email for: ${emailController.text}');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Check your email for a verification link!')),
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginScreen()),
+                            );
+                        }
+                        }
+                      },
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(fontSize: screenWidth * 0.045),
+                    ),
+                  ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
